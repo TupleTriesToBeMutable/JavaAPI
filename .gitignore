@@ -1,0 +1,22 @@
+HELP.md
+.gradle
+build/
+gradle/wrapper/gradle-wrapper.jar
+gradle/wrapper/gradle-wrapper.properties
+
+### Data ###
+/src/main/resources/data
+gradlew
+gradlew.bat
+settings.gradle
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+out/
+!**/src/main/**/out/
+!**/src/test/**/out/
+
+
