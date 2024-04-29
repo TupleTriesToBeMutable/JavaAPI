@@ -1,13 +1,14 @@
 package jokylionplay.project2024.mappers;
 
 import jokylionplay.project2024.dto.UserProgressDTO;
+import jokylionplay.project2024.entities.UserProgress;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
 @Mapper
-public interface UserProgress {
+public interface UserProgressMapper {
 
-    UserProgress MAPPER = Mappers.getMapper(UserProgress.class );
+    UserProgressMapper MAPPER = Mappers.getMapper(UserProgressMapper.class );
 
     UserProgressDTO toDTO(UserProgress s);
 
