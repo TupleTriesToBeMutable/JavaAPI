@@ -6,8 +6,11 @@ import jokylionplay.project2024.entities.Internship;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
-
+@Component
+@Scope("session")
 @Mapper
 public interface InternshipMapper {
 
