@@ -7,7 +7,10 @@ import jokylionplay.project2024.mappers.UserMapper;
 import jokylionplay.project2024.repository.InternshipRepository;
 import jokylionplay.project2024.repository.UserRepository;
 import lombok.AllArgsConstructor;
+import org.hibernate.engine.internal.Collections;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -20,7 +23,7 @@ public class RegistrationService {
     @Autowired
     private InternshipRepository internshipRepository;
 
-    public UserDTO userRegistration(UserDTO dto){
+    public UserDTO  registration(UserDTO dto){
         User user = UserMapper.MAPPER.toEntity(dto);
         user = userRepository.save(user);
         return UserMapper.MAPPER.toDTO(user);
@@ -28,23 +31,25 @@ public class RegistrationService {
 
     /**
      *
-     * @param intershipId
+     * @param internshipId
      * @param userId
      * @return
-     * Дописать с try и разные ошибки, что нет стадировки такой или такого пользователя
+     *
      */
-    public boolean internshipRegistration(Long intershipId, Long userId){
+    public void internshipRegistration(Long internshipId, Long userId) throws IllegalArgumentException{
         Optional<User> user = userRepository.findById(userId);
-        Optional<Internship> internship = internshipRepository.findById(intershipId);
+        Optional<Internship> internship = internshipRepository.findById(internshipId);
 
-        boolean isDone = true;
-        if(user.isPresent() && internship.isPresent())
-        {
-            internship.get().getUsers().add(user.get());
-        }
-        else
-            isDone = false;
+        if(user.isEmpty())
+            throw new IllegalArgumentException("The user does not exist");
 
-        return isDone;
+        if(internship.isEmpty())
+            throw new IllegalArgumentException("The internship does not exist");
+
+        if(internship.get().getUsers().contains(user.get()))
+            throw new IllegalArgumentException("The user has already registered for an internship");
+
+        internship.get().getUsers().add(user.get());
+        internshipRepository.flush();
     }
 }
