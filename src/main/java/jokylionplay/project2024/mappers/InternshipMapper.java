@@ -1,5 +1,6 @@
 package jokylionplay.project2024.mappers;
 
+import jokylionplay.project2024.dto.InternshipDTO;
 import jokylionplay.project2024.dto.InternshipLessonsDTO;
 import jokylionplay.project2024.dto.InternshipUsersDTO;
 import jokylionplay.project2024.entities.Internship;
@@ -25,4 +26,7 @@ public interface InternshipMapper {
     Internship toEntity(InternshipUsersDTO s);
 
     Internship toEntity(InternshipLessonsDTO s);
+
+    Internship toEntity(InternshipDTO s);
+    InternshipDTO toDTO(Internship s);
 }
