@@ -6,6 +6,7 @@ import jokylionplay.project2024.dto.InternshipUsersDTO;
 import jokylionplay.project2024.entities.Internship;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
 import org.mapstruct.factory.Mappers;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -29,4 +30,12 @@ public interface InternshipMapper {
 
     Internship toEntity(InternshipDTO s);
     InternshipDTO toDTO(Internship s);
+
+    /**
+     *
+     * @param data - все данные без связей
+     * @param relationships - исходный объект
+     * Меняет в существующем объекте все кроме связей
+     */
+    void toEntityWithExistsRelationships(InternshipDTO data, @MappingTarget Internship relationships);
 }

@@ -12,6 +12,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @AllArgsConstructor
 public class InternshipService {
@@ -23,5 +25,20 @@ public class InternshipService {
         Internship internship = InternshipMapper.MAPPER.toEntity(dto);
         internship = repository.save(internship);
         return InternshipMapper.MAPPER.toDTO(internship);
+    }
+
+    public void delete(Long internshipId) throws IllegalArgumentException{
+        if(repository.existsById(internshipId))
+            throw new IllegalArgumentException("Internship doesn`t exist");
+        else
+            repository.deleteById(internshipId);
+    }
+
+    public void update(InternshipDTO dto) throws IllegalArgumentException{
+        Optional<Internship> internship = repository.findById(dto.getId());
+        if(internship.isEmpty())
+            throw new IllegalArgumentException("Internship doesn`t exist");
+        else
+            InternshipMapper.MAPPER.toEntityWithExistsRelationships(dto, internship.get());
     }
 }
