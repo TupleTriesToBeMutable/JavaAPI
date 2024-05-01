@@ -13,7 +13,7 @@ import java.util.Collection;
 @Data
 @AllArgsConstructor
 public class InternshipDTO {
-
+    
     private Long id;
 
     private String name;

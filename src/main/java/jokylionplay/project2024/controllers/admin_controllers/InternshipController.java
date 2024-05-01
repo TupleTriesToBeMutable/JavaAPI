@@ -1,5 +1,8 @@
 package jokylionplay.project2024.controllers.admin_controllers;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jokylionplay.project2024.dto.InternshipDTO;
 import jokylionplay.project2024.services.InternshipService;
 import lombok.AllArgsConstructor;
@@ -10,14 +13,20 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+@Tag(name = "Admin Стажировки", description = "Управление стажировками")
 @RestController
 @RequestMapping("/admin/{adminId}")
 @AllArgsConstructor
 public class InternshipController {
     private InternshipService internshipService;
 
+    @Operation(summary = "Создание стажировки",
+    description = "Создает стадировки, без связей с уроками, заданиями и пользователями")
     @PostMapping("/create-internship")
-    public ResponseEntity<InternshipDTO> createInternship(@RequestBody InternshipDTO internshipDTO){
+    public ResponseEntity<InternshipDTO> createInternship(
+            @RequestBody @Parameter(description = "DTO без связей и списков")
+            InternshipDTO internshipDTO){
+
         InternshipDTO saved = internshipService.create(internshipDTO);
         return new ResponseEntity<>(saved, HttpStatus.CREATED);
     }
