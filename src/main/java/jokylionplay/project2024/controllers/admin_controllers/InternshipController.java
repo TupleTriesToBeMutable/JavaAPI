@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RestController;
 @AllArgsConstructor
 public class InternshipController {
     private InternshipService internshipService;
-
     @Operation(summary = "Создание стажировки",
     description = "Создает стадировки, без связей с уроками, заданиями и пользователями")
     @PostMapping("/create-internship")
