@@ -11,4 +11,5 @@ public class SwaggerConfig {
     public OpenAPI customOpenAPI() {
         return new OpenAPI().info( new Info().title("InternshipApi").version("1.0.0"));
     }
+
 }
