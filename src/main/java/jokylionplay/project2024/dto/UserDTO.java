@@ -1,6 +1,5 @@
 package jokylionplay.project2024.dto;
 
-import jakarta.persistence.*;
 import jokylionplay.project2024.entities.Internship;
 import jokylionplay.project2024.entities.UserProgress;
 import lombok.AllArgsConstructor;
