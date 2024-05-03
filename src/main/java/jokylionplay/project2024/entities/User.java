@@ -43,6 +43,10 @@ public class User {
     @Column(name = "username")
     private String username;
 
+    @Schema(description = "Пароль")
+    @Column(name = "password")
+    private String password;
+
     @Schema(description = "ID в телеграмме")
     @Column(name = "telegram_id")
     private String telegramId;

@@ -7,6 +7,9 @@ import jokylionplay.project2024.repository.TaskRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+/**
+ * Добавление, удаление, обновление, прикрепление к уроку
+ */
 @Service
 @AllArgsConstructor
 public class TaskService {
@@ -17,4 +20,13 @@ public class TaskService {
         Task saved = taskRepository.save(task);
         return TaskMapper.MAPPER.toDTO(saved);
     }
+
+    /**
+     * @param id
+     * Вся логика будет вне
+     */
+    public void deleteTask(Long id) throws IllegalArgumentException{
+        taskRepository.deleteById(id);
+    }
+
 }
