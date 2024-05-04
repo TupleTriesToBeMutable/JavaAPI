@@ -36,4 +36,8 @@ public class Lesson {
     @Schema(description = "Название")
     @Column(name = "name")
     private String name;
+
+    @Schema(description = "Видимость для пользователй")
+    @Column(name = "visibility")
+    boolean visibilityToUsers;
 }

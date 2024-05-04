@@ -42,4 +42,8 @@ public class Task {
     @Schema(description = "Ссылка на эталонный репозиторий")
     @Column(name = "url")
     private String url;
+
+    @Schema(description = "Видимость для пользователй")
+    @Column(name = "visibility")
+    boolean visibilityToUsers;
 }
