@@ -3,10 +3,7 @@ package jokylionplay.project2024.controllers.public_controllers;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jokylionplay.project2024.dto.UserDTO;
-import jokylionplay.project2024.entities.User;
-import jokylionplay.project2024.mappers.UserMapper;
-import jokylionplay.project2024.repository.UserRepository;
+import jokylionplay.project2024.dto.UserInfoDTO;
 import jokylionplay.project2024.services.RegistrationService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +28,7 @@ public class RegistrationController {
     @PostMapping
     public ResponseEntity<?> userRegistration(
             @Parameter(description = "DTO объект пользователя")
-            @RequestBody UserDTO dto){
+            @RequestBody UserInfoDTO dto){
         registrationService.registration(dto);
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }

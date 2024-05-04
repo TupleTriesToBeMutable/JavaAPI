@@ -66,4 +66,18 @@ public class TaskService {
         tasks.add(task.get());
         taskRepository.flush();
     }
+
+    public boolean removeFromLesson(Long taskId, Long lessonId){
+        Optional<Lesson> lesson = lessonRepository.findById(lessonId);
+        Optional<Task> task = taskRepository.findById(taskId);
+
+        if(lesson.isEmpty())
+            throw new IllegalArgumentException("Removing lesson from Intership : The lesson does not exist");
+
+        if(task.isEmpty())
+            throw new IllegalArgumentException("Removing lesson from Intership : The task does not exist");
+
+        return  lesson.get().getTasks().remove(task.get()) &&
+                task.get().getLessons().remove(lesson.get());
+    }
 }

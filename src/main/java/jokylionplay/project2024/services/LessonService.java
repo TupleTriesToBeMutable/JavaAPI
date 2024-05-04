@@ -53,10 +53,10 @@ public class LessonService {
         Optional<Internship> internship = internshipRepository.findById(internshipId);
 
         if(lesson.isEmpty())
-            throw new IllegalArgumentException("Lesson to Intership : The lesson does not exist");
+            throw new IllegalArgumentException("Adding lesson to Intership : The lesson does not exist");
 
         if(internship.isEmpty())
-            throw new IllegalArgumentException("Lesson to Intership : The internship does not exist");
+            throw new IllegalArgumentException("Adding lesson to Intership : The internship does not exist");
 
         Collection<Lesson> lessons = internship.get().getLessons();
         if(lessons.contains(lesson.get()))
@@ -66,4 +66,22 @@ public class LessonService {
         internshipRepository.flush();
     }
 
+    /**
+     * Проверить работает ли удаление. если убрать из одной коллекции
+     * @param lessonId
+     * @param internshipId
+     */
+    public boolean removeFromInternship(Long lessonId, Long internshipId){
+        Optional<Lesson> lesson = lessonRepository.findById(lessonId);
+        Optional<Internship> internship = internshipRepository.findById(internshipId);
+
+        if(lesson.isEmpty())
+            throw new IllegalArgumentException("Removing lesson from Intership : The lesson does not exist");
+
+        if(internship.isEmpty())
+            throw new IllegalArgumentException("Removing lesson from Intership : The internship does not exist");
+
+        return  lesson.get().getInternships().remove(internship.get()) &&
+                internship.get().getLessons().remove(lesson.get());
+    }
 }
