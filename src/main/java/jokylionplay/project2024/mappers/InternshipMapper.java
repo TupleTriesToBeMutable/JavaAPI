@@ -1,6 +1,6 @@
 package jokylionplay.project2024.mappers;
 
-import jokylionplay.project2024.dto.InternshipDTO;
+import jokylionplay.project2024.dto.InternshipInfoDTO;
 import jokylionplay.project2024.dto.InternshipLessonsDTO;
 import jokylionplay.project2024.dto.InternshipUsersDTO;
 import jokylionplay.project2024.entities.Internship;
@@ -23,13 +23,10 @@ public interface InternshipMapper {
 
     @Mapping(source = "lessons", target = "lessons")
     InternshipLessonsDTO toInternshipLessonsDTO(Internship s);
+    
+    InternshipInfoDTO toInfoDTO(Internship s);
 
-    Internship toEntity(InternshipUsersDTO s);
-
-    Internship toEntity(InternshipLessonsDTO s);
-
-    Internship toEntity(InternshipDTO s);
-    InternshipDTO toDTO(Internship s);
+    Internship toEntity(InternshipInfoDTO s);
 
     /**
      *
@@ -37,5 +34,5 @@ public interface InternshipMapper {
      * @param relationships - исходный объект
      * Меняет в существующем объекте все кроме связей
      */
-    void toEntityWithExistsRelationships(InternshipDTO data, @MappingTarget Internship relationships);
+    void updateEntityInfo(InternshipInfoDTO info, @MappingTarget Internship relationships);
 }

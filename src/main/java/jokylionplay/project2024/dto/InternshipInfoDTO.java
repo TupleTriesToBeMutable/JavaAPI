@@ -6,7 +6,7 @@ import java.sql.Date;
 
 @Data
 @AllArgsConstructor
-public class InternshipDTO {
+public class InternshipInfoDTO {
 
     private Long id;
 

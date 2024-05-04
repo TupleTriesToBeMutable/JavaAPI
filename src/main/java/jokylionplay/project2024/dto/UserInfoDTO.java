@@ -1,22 +1,15 @@
 package jokylionplay.project2024.dto;
 
-import jokylionplay.project2024.entities.Internship;
-import jokylionplay.project2024.entities.UserProgress;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.sql.Date;
-import java.util.Collection;
 
 @Data
 @AllArgsConstructor
-public class UserDTO {
+public class UserInfoDTO {
 
     private Long id;
-
-    private Collection<Internship> internships;
-
-    private Collection<UserProgress> usersTasks;
 
     private String fullname;
 

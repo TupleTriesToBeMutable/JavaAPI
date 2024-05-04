@@ -14,7 +14,7 @@ public interface UserProgressMapper {
 
     UserProgressMapper MAPPER = Mappers.getMapper(UserProgressMapper.class );
 
-    UserProgressDTO toDTO(UserProgress s);
+    UserProgressDTO toUserProgressDTO(UserProgress s);
 
     UserProgress toEntity(UserProgressDTO s);
 }

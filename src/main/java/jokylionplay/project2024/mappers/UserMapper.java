@@ -1,8 +1,11 @@
 package jokylionplay.project2024.mappers;
 
-import jokylionplay.project2024.dto.UserDTO;
+import jokylionplay.project2024.dto.UserInfoDTO;
+import jokylionplay.project2024.dto.UserInternships;
+import jokylionplay.project2024.dto.UserTasksDTO;
 import jokylionplay.project2024.entities.User;
 import org.mapstruct.Mapper;
+import org.mapstruct.MappingTarget;
 import org.mapstruct.factory.Mappers;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -13,7 +16,13 @@ import org.springframework.stereotype.Component;
 public interface UserMapper {
     UserMapper MAPPER = Mappers.getMapper(UserMapper.class );
 
-    UserDTO toDTO(User s);
+    UserTasksDTO toUserTasksDTO(User s);
 
-    User toEntity(UserDTO s);
+    UserInternships toUserInternships(User s);
+
+    UserInfoDTO toInfoDTO(User s);
+
+    User toEntity(UserInfoDTO s);
+
+    void updateEntityInfo(UserInfoDTO info, @MappingTarget User relationships);
 }
