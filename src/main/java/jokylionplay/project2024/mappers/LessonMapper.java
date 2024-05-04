@@ -11,6 +11,8 @@ import org.mapstruct.factory.Mappers;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 
 @Component
 @Scope("session")
@@ -26,4 +28,6 @@ public interface LessonMapper {
     Lesson toEntity(LessonInfoDTO s);
 
     void updateEntityInfo(LessonInfoDTO info, @MappingTarget Lesson relationships);
+
+    List<LessonTasksDTO> toDTOList(List<Lesson> s);
 }

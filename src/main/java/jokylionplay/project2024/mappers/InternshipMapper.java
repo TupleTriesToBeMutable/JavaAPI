@@ -11,6 +11,8 @@ import org.mapstruct.factory.Mappers;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 @Scope("session")
 @Mapper
@@ -35,4 +37,6 @@ public interface InternshipMapper {
      * Меняет в существующем объекте все кроме связей
      */
     void updateEntityInfo(InternshipInfoDTO info, @MappingTarget Internship relationships);
+
+    List<InternshipInfoDTO> toDTOList(List<Internship> s);
 }

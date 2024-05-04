@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -79,5 +80,9 @@ public class TaskService {
 
         return  lesson.get().getTasks().remove(task.get()) &&
                 task.get().getLessons().remove(lesson.get());
+    }
+
+    public List<Task> getAll(){
+        return taskRepository.findAll();
     }
 }

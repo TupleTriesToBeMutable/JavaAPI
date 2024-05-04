@@ -8,6 +8,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -36,5 +38,9 @@ public class InternshipService {
             throw new IllegalArgumentException("Updating : Internship doesn`t exist");
         else
             InternshipMapper.MAPPER.updateEntityInfo(dto, internship.get());
+    }
+
+    public List<InternshipInfoDTO> getAll(){
+        return InternshipMapper.MAPPER.toDTOList(internshipRepository.findAll());
     }
 }
