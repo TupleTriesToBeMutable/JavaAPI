@@ -3,7 +3,7 @@ package jokylionplay.project2024.controllers.admin_controllers;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jokylionplay.project2024.dto.InternshipDTO;
+import jokylionplay.project2024.dto.InternshipInfoDTO;
 import jokylionplay.project2024.services.InternshipService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -22,11 +22,11 @@ public class InternshipController {
     @Operation(summary = "Создание стажировки",
     description = "Создает стадировки, без связей с уроками, заданиями и пользователями")
     @PostMapping("/create-internship")
-    public ResponseEntity<InternshipDTO> createInternship(
+    public ResponseEntity<InternshipInfoDTO> createInternship(
             @RequestBody @Parameter(description = "DTO без связей и списков")
-            InternshipDTO internshipDTO){
+            InternshipInfoDTO internshipInfoDTO){
 
-        InternshipDTO saved = internshipService.create(internshipDTO);
+        InternshipInfoDTO saved = internshipService.create(internshipInfoDTO);
         return new ResponseEntity<>(saved, HttpStatus.CREATED);
     }
 }

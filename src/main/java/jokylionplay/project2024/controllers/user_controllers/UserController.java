@@ -3,7 +3,7 @@ package jokylionplay.project2024.controllers.user_controllers;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jokylionplay.project2024.dto.InternshipDTO;
+import jokylionplay.project2024.dto.InternshipInfoDTO;
 import jokylionplay.project2024.services.RegistrationService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -25,7 +25,7 @@ public class UserController {
             @Parameter(description = "Id пользователя, доступно из имени запроса")
             @PathVariable Long usedId,
             @Parameter(description = "DTO пуст, кроме ID стажировки")
-            @RequestBody InternshipDTO internship){
+            @RequestBody InternshipInfoDTO internship){
         try{
             registrationService.internshipRegistration(internship.getId(), usedId);
             return new ResponseEntity<>(HttpStatus.ACCEPTED);

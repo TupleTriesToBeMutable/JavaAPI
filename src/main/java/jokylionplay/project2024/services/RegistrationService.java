@@ -1,16 +1,13 @@
 package jokylionplay.project2024.services;
 
-import jokylionplay.project2024.dto.UserDTO;
+import jokylionplay.project2024.dto.UserInfoDTO;
 import jokylionplay.project2024.entities.Internship;
 import jokylionplay.project2024.entities.User;
 import jokylionplay.project2024.mappers.UserMapper;
 import jokylionplay.project2024.repository.InternshipRepository;
 import jokylionplay.project2024.repository.UserRepository;
 import lombok.AllArgsConstructor;
-import org.hibernate.engine.internal.Collections;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Modifying;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -23,10 +20,10 @@ public class RegistrationService {
     @Autowired
     private InternshipRepository internshipRepository;
 
-    public UserDTO  registration(UserDTO dto){
+    public UserInfoDTO registration(UserInfoDTO dto){
         User user = UserMapper.MAPPER.toEntity(dto);
         user = userRepository.save(user);
-        return UserMapper.MAPPER.toDTO(user);
+        return UserMapper.MAPPER.toInfoDTO(user);
     }
 
     /**

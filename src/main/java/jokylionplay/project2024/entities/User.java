@@ -23,7 +23,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Schema(description = "Стажировки на которые пользователн записан или был записан")
+    @Schema(description = "Стажировки на которые пользователь записан или был записан")
     @ManyToMany(mappedBy = "users")
     private Collection<Internship> internships;
 
