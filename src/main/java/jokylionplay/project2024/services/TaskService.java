@@ -82,7 +82,7 @@ public class TaskService {
                 task.get().getLessons().remove(lesson.get());
     }
 
-    public List<Task> getAll(){
+    public List<Task> getAllInLesson(){
         return taskRepository.findAll();
     }
 }

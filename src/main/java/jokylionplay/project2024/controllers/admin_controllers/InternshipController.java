@@ -15,13 +15,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Tag(name = "Admin Стажировки", description = "Управление стажировками")
 @RestController
-@RequestMapping("/admin/{adminId}")
+@RequestMapping("/admin/{adminId}/internships")
 @AllArgsConstructor
 public class InternshipController {
     private InternshipService internshipService;
     @Operation(summary = "Создание стажировки",
     description = "Создает стадировки, без связей с уроками, заданиями и пользователями")
-    @PostMapping("/create-internship")
+    @PostMapping("/create")
     public ResponseEntity<InternshipInfoDTO> createInternship(
             @RequestBody @Parameter(description = "DTO без связей и списков")
             InternshipInfoDTO internshipInfoDTO){

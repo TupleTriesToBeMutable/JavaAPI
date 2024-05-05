@@ -1,5 +1,6 @@
 package jokylionplay.project2024.services;
 
+import jakarta.persistence.EntityManager;
 import jokylionplay.project2024.dto.LessonInfoDTO;
 import jokylionplay.project2024.dto.LessonTasksDTO;
 import jokylionplay.project2024.entities.Internship;
@@ -38,7 +39,10 @@ public class LessonService {
 
     public void delete(Long lessonId) throws IllegalArgumentException{
         if(lessonRepository.existsById(lessonId))
+        {
             lessonRepository.deleteById(lessonId);
+            lessonRepository.flush();
+        }
         else
             throw new IllegalArgumentException("Deleting : Lesson doesn`t exist");
     }
@@ -48,7 +52,10 @@ public class LessonService {
         if(lesson.isEmpty())
             throw new IllegalArgumentException("Updating : Lesson doesn`t exist");
         else
+        {
             LessonMapper.MAPPER.updateEntityInfo(dto, lesson.get());
+            lessonRepository.flush();
+        }
     }
 
     public void addToInternship(Long lessonId, Long internshipId){
@@ -74,7 +81,7 @@ public class LessonService {
      * @param lessonId
      * @param internshipId
      */
-    public boolean removeFromInternship(Long lessonId, Long internshipId){
+    public void removeFromInternship(Long lessonId, Long internshipId){
         Optional<Lesson> lesson = lessonRepository.findById(lessonId);
         Optional<Internship> internship = internshipRepository.findById(internshipId);
 
@@ -84,11 +91,17 @@ public class LessonService {
         if(internship.isEmpty())
             throw new IllegalArgumentException("Removing lesson from Intership : The internship does not exist");
 
-        return  lesson.get().getInternships().remove(internship.get()) &&
-                internship.get().getLessons().remove(lesson.get());
+        internship.get().getLessons().remove(lesson.get());
+        internshipRepository.flush();
+
     }
 
-    public List<LessonTasksDTO> getAll(Long internshipId){
+    /**
+     * Не факт что работает
+     * @param internshipId
+     * @return
+     */
+    public List<LessonTasksDTO> getAllInInternship(Long internshipId){
         return LessonMapper.MAPPER.toDTOList(lessonRepository.findAllRelatedWithInternship(internshipId));
     }
 }
