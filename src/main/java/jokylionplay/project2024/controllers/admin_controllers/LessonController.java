@@ -43,7 +43,7 @@ public class LessonController {
 
     @Operation(summary = "Удаление из стажировки",
             description = "Удаляет из одной конкретной стажировки")
-    @PostMapping("/delete")
+    @DeleteMapping("/delete")
     public ResponseEntity<?> delete(
             @Parameter(description = "DTO без связей и списков")
             @RequestBody
@@ -63,7 +63,7 @@ public class LessonController {
 
     @Operation(summary = "Обновление информации о уроке",
             description = "Обновление имени, самого задания")
-    @PostMapping("/update")
+    @PatchMapping("/update")
     public ResponseEntity<?> update(
             @Parameter(description = "DTO без связей и списков, проверяет на существование")
             @RequestBody
@@ -80,7 +80,7 @@ public class LessonController {
 
     @Operation(summary = "Список стажировок",
             description = "Список стажировок, где используется этот урок")
-    @PostMapping("/internshiplist")
+    @GetMapping("/internshiplist")
     public ResponseEntity<List<LessonTasksDTO>> internshipList(
             @Parameter(description = "DTO без связей и списков")
             @RequestBody

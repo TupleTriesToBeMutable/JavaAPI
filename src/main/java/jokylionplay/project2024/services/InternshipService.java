@@ -27,9 +27,11 @@ public class InternshipService {
 
     public void delete(Long internshipId) throws IllegalArgumentException{
         if(internshipRepository.existsById(internshipId))
-            throw new IllegalArgumentException("Deleting : Internship doesn`t exist");
-        else
+        {
             internshipRepository.deleteById(internshipId);
+            internshipRepository.flush();
+        }
+        else throw new IllegalArgumentException("Deleting : Internship doesn`t exist");
     }
 
     public void update(InternshipInfoDTO dto) throws IllegalArgumentException{
@@ -37,7 +39,10 @@ public class InternshipService {
         if(internship.isEmpty())
             throw new IllegalArgumentException("Updating : Internship doesn`t exist");
         else
+        {
             InternshipMapper.MAPPER.updateEntityInfo(dto, internship.get());
+            internshipRepository.flush();
+        }
     }
 
     public List<InternshipInfoDTO> getAll(){
