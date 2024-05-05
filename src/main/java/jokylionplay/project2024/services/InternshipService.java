@@ -1,9 +1,13 @@
 package jokylionplay.project2024.services;
 
 import jokylionplay.project2024.dto.InternshipInfoDTO;
+import jokylionplay.project2024.dto.InternshipLessonsDTO;
+import jokylionplay.project2024.dto.LessonTasksDTO;
 import jokylionplay.project2024.entities.Internship;
 import jokylionplay.project2024.mappers.InternshipMapper;
+import jokylionplay.project2024.mappers.LessonMapper;
 import jokylionplay.project2024.repository.InternshipRepository;
+import jokylionplay.project2024.repository.LessonRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -47,5 +51,13 @@ public class InternshipService {
 
     public List<InternshipInfoDTO> getAll(){
         return InternshipMapper.MAPPER.toDTOList(internshipRepository.findAll());
+    }
+
+    public List<LessonTasksDTO> getAllInInternship(Long internshipId){
+        Optional<Internship> internship = internshipRepository.findById(internshipId);
+        if(internship.isPresent())
+            return LessonMapper.MAPPER.toDTOList(internship.get().getLessons());
+        else
+            return null;
     }
 }

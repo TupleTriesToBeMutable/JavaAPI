@@ -20,11 +20,42 @@ public class TaskController {
     @Operation(summary = "Создание заданий",
             description = "Создает задание, без связи с уроками")
     @PostMapping("/create")
-    public ResponseEntity<TaskInfoDTO> createTask(
+    public ResponseEntity<TaskInfoDTO> create(
             @Parameter(description = "DTO объект")
             @RequestBody TaskInfoDTO dto){
         TaskInfoDTO saved = taskService.create(dto);
         return new ResponseEntity<>(saved, HttpStatus.CREATED);
     }
 
+    @Operation(summary = "Удаление заданий",
+            description = "Удаление, если не связан ни с чем")
+    @DeleteMapping("/delete")
+    public ResponseEntity<?> delete(
+            @Parameter(description = "Id задания")
+            @RequestBody TaskInfoDTO dto){
+        try {
+            taskService.delete(dto.getId());
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+        catch (IllegalArgumentException e){
+            System.out.println(e.getMessage());
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @Operation(summary = "Изменение задания",
+            description = "Изменение данных, без связей")
+    @PatchMapping ("/update")
+    public ResponseEntity<?> update(
+            @Parameter(description = "DTO для обновления")
+            @RequestBody TaskInfoDTO dto){
+        try {
+            taskService.update(dto);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+        catch (IllegalArgumentException e){
+            System.out.println(e.getMessage());
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
 }

@@ -47,7 +47,10 @@ public class TaskService {
         if(task.isEmpty())
             throw new IllegalArgumentException("Updating : Task doesn`t exist");
         else
+        {
             TaskMapper.MAPPER.updateEntityInfo(dto, task.get());
+            taskRepository.flush();
+        }
     }
 
     public void addToLesson(Long taskId, Long lessonId){
@@ -68,7 +71,7 @@ public class TaskService {
         taskRepository.flush();
     }
 
-    public boolean removeFromLesson(Long taskId, Long lessonId){
+    public void removeFromLesson(Long taskId, Long lessonId){
         Optional<Lesson> lesson = lessonRepository.findById(lessonId);
         Optional<Task> task = taskRepository.findById(taskId);
 
@@ -78,8 +81,8 @@ public class TaskService {
         if(task.isEmpty())
             throw new IllegalArgumentException("Removing lesson from Intership : The task does not exist");
 
-        return  lesson.get().getTasks().remove(task.get()) &&
-                task.get().getLessons().remove(lesson.get());
+        lesson.get().getTasks().remove(task.get());
+        lessonRepository.flush();
     }
 
     public List<Task> getAllInLesson(){

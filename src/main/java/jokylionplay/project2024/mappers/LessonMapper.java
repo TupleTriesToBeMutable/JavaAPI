@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Set;
 
 
 @Component
@@ -29,5 +30,5 @@ public interface LessonMapper {
 
     void updateEntityInfo(LessonInfoDTO info, @MappingTarget Lesson relationships);
 
-    List<LessonTasksDTO> toDTOList(List<Lesson> s);
+    List<LessonTasksDTO> toDTOList(Set<Lesson> s);
 }

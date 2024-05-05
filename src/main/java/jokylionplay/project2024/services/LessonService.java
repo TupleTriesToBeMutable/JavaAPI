@@ -95,13 +95,4 @@ public class LessonService {
         internshipRepository.flush();
 
     }
-
-    /**
-     * Не факт что работает
-     * @param internshipId
-     * @return
-     */
-    public List<LessonTasksDTO> getAllInInternship(Long internshipId){
-        return LessonMapper.MAPPER.toDTOList(lessonRepository.findAllRelatedWithInternship(internshipId));
-    }
 }

@@ -8,13 +8,4 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-public interface  LessonRepository extends JpaRepository<Lesson, Long> {
-    @Query(value = "select * " +
-            "from internships_lessons " +
-            "join lessons " +
-            "on internships_lessons.lesson_id = lessons.id " +
-            "where internships_lessons.internship_id = :internshipId",
-            nativeQuery = true)
-    List<Lesson> findAllRelatedWithInternship(Long internshipId);
-
-}
+public interface  LessonRepository extends JpaRepository<Lesson, Long> { }

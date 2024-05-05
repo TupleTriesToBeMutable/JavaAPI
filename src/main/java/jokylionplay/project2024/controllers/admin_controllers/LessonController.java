@@ -78,14 +78,4 @@ public class LessonController {
         }
     }
 
-    @Operation(summary = "Список стажировок",
-            description = "Список стажировок, где используется этот урок")
-    @GetMapping("/internshiplist")
-    public ResponseEntity<List<LessonTasksDTO>> internshipList(
-            @Parameter(description = "DTO без связей и списков")
-            @RequestBody
-            LessonInfoDTO lessonId){
-        return new ResponseEntity<>(lessonService.getAllInInternship(lessonId.getId()), HttpStatus.FOUND);
-    }
-
 }
