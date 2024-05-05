@@ -9,6 +9,8 @@ import lombok.Setter;
 
 import java.sql.Date;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 @Schema(description = "Данные пользователя")
 @Getter
@@ -25,11 +27,11 @@ public class User {
 
     @Schema(description = "Стажировки на которые пользователь записан или был записан")
     @ManyToMany(mappedBy = "users")
-    private Collection<Internship> internships;
+    private Set<Internship> internships = new HashSet<>();
 
     @Schema(description = "Выданные задания и их состояния")
     @OneToMany(mappedBy = "id", fetch = FetchType.LAZY)
-    private Collection<UserProgress> usersTasks;
+    private Set<UserProgress> usersTasks = new HashSet<>();
 
     @Schema(description = "ФИО")
     @Column(name = "fullname")

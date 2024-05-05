@@ -9,6 +9,8 @@ import lombok.Setter;
 
 import java.sql.Date;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 
 @Schema(description = "Стажировка, связи многие ко многим (пользователи, уроки) ")
@@ -29,14 +31,14 @@ public class Internship {
     @JoinTable(name = "internships_users",
         joinColumns = @JoinColumn(name = "internship_id"),
         inverseJoinColumns = @JoinColumn(name = "user_id"))
-    private Collection<User> users;
+    private Set<User> users = new HashSet<>();
 
     @Schema(description = "Список уроков")
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "internships_lessons",
             joinColumns = @JoinColumn(name = "internship_id"),
             inverseJoinColumns = @JoinColumn(name = "lesson_id"))
-    private Collection<Lesson> lessons;
+    private Set<Lesson> lessons = new HashSet<>();
 
     @Schema(description = "Название")
     @Column(name = "name")

@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 @Schema(description = "Задания, связи многие ко многим (задания), один ко многим(пользователи) ")
 @Getter
@@ -25,11 +27,11 @@ public class Task {
 
     @Schema(description = "Список уроков, в которые ыходят эти задания")
     @ManyToMany(mappedBy = "tasks")
-    private Collection<Lesson> lessons;
+    private Set<Lesson> lessons = new HashSet<>();
 
     @Schema(description = "Список пользователей, у которых есть эта задача")
     @OneToMany(mappedBy = "id", fetch = FetchType.LAZY)
-    private Collection<UserProgress> usersTasks;
+    private Set<UserProgress> usersTasks = new HashSet<>();
 
     @Schema(description = "Название")
     @Column(name = "name")
