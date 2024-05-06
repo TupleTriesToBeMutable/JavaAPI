@@ -15,5 +15,5 @@ public interface InternshipRepository extends JpaRepository<Internship, Long> {
             "on internships_lessons.lesson_id = lessons.id " +
             "where internships_lessons.internship_id = :internshipId",
             nativeQuery = true)
-    List<Lesson> findAllRelatedWithInternship(Long internshipId);
+    List<Lesson> findLessonsRelatedWithInternship(Long internshipId);
 }

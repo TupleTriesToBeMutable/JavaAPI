@@ -48,13 +48,13 @@ public class LessonController {
     @DeleteMapping("/delete")
     public ResponseEntity<?> delete(
             @Parameter(description = "Парметр запроса id урока")
-            @RequestParam
-            Long id,
+            @RequestParam("id")
+            Long lessonId,
             @Parameter(description = "Номер стажировки")
             @PathVariable
             Long internshipId){
         try{
-            lessonService.removeFromInternship(id, internshipId);
+            lessonService.removeFromInternship(lessonId, internshipId);
             return new ResponseEntity<>(HttpStatus.OK);
         }
         catch (IllegalArgumentException e){
@@ -85,7 +85,7 @@ public class LessonController {
     @GetMapping("/tasks")
     public ResponseEntity<List<TaskInfoDTO>> taskList(
             @Parameter(description = "Парметр запроса id урока")
-            @RequestParam
+            @RequestParam("id")
             Long id){
         return new ResponseEntity<>(lessonService.getTasks(id), HttpStatus.FOUND);
     }

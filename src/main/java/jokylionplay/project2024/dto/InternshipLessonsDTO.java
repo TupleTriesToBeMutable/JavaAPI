@@ -12,7 +12,7 @@ public class InternshipLessonsDTO {
 
     private Long id;
 
-    private Collection<Lesson> lessons;
+    private Collection<LessonTasksDTO> lessons;
 
     private String name;
 

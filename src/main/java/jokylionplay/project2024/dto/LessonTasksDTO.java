@@ -12,7 +12,7 @@ public class LessonTasksDTO {
 
     private Long id;
 
-    private Collection<Task> tasks;
+    private Collection<TaskInfoDTO> tasks;
 
     private String name;
 }

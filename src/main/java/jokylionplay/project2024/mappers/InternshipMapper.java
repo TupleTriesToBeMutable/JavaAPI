@@ -29,14 +29,10 @@ public interface InternshipMapper {
     InternshipInfoDTO toInfoDTO(Internship s);
 
     Internship toEntity(InternshipInfoDTO s);
-
-    /**
-     *
-     * @param data - все данные без связей
-     * @param relationships - исходный объект
-     * Меняет в существующем объекте все кроме связей
-     */
+    
     void updateEntityInfo(InternshipInfoDTO info, @MappingTarget Internship relationships);
 
-    List<InternshipInfoDTO> toDTOList(List<Internship> s);
+    List<InternshipInfoDTO> toInfoDTOList(List<Internship> s);
+
+    List<InternshipLessonsDTO> toInternshipLessonsDTOList(List<Internship> s);
 }

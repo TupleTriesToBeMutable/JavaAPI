@@ -33,7 +33,7 @@ public class TaskController {
     @DeleteMapping("/delete")
     public ResponseEntity<?> delete(
             @Parameter(description = "Параметр запроса id задания")
-            @RequestParam
+            @RequestParam("id")
             Long id){
         try {
             taskService.delete(id);

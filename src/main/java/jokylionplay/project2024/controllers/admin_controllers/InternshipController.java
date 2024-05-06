@@ -4,18 +4,14 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jokylionplay.project2024.dto.InternshipInfoDTO;
-import jokylionplay.project2024.dto.LessonInfoDTO;
 import jokylionplay.project2024.dto.LessonTasksDTO;
-import jokylionplay.project2024.repository.LessonRepository;
 import jokylionplay.project2024.services.InternshipService;
-import jokylionplay.project2024.services.LessonService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.SQLException;
 import java.util.List;
 
 @Tag(name = "Admin Стажировки", description = "Управление стажировками")
@@ -30,7 +26,8 @@ public class InternshipController {
     description = "Создает стадировки, без связей с уроками, заданиями и пользователями")
     @PostMapping("/create")
     public ResponseEntity<InternshipInfoDTO> create(
-            @RequestBody @Parameter(description = "DTO без связей и списков")
+            @Parameter(description = "DTO без связей и списков")
+            @RequestBody
             InternshipInfoDTO internshipInfoDTO){
 
         InternshipInfoDTO saved = internshipService.create(internshipInfoDTO);
@@ -41,8 +38,8 @@ public class InternshipController {
             description = "Удаляет стажировку, если нет никаких связей с ней")
     @DeleteMapping("/delete")
     public ResponseEntity<?> delete(
-            @Parameter(description = "Парметр запроса Id стажировки")
-            @RequestParam
+            @Parameter(description = "Парметр запроса id стажировки")
+            @RequestParam("id")
             Long id){
 
         try {
@@ -87,6 +84,6 @@ public class InternshipController {
             @Parameter(description = "Параметр запроса id стажировки")
             @RequestParam("id")
             Long id){
-        return new ResponseEntity<>(internshipService.getAllInInternship(id), HttpStatus.FOUND);
+        return new ResponseEntity<>(internshipService.findLessonsRelatedWithInternship(id), HttpStatus.FOUND);
     }
 }
