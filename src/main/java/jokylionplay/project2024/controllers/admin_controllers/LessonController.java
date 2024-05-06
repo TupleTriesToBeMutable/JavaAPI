@@ -3,8 +3,10 @@ package jokylionplay.project2024.controllers.admin_controllers;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jokylionplay.project2024.dto.InternshipInfoDTO;
 import jokylionplay.project2024.dto.LessonInfoDTO;
 import jokylionplay.project2024.dto.LessonTasksDTO;
+import jokylionplay.project2024.dto.TaskInfoDTO;
 import jokylionplay.project2024.services.LessonService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -45,14 +47,14 @@ public class LessonController {
             description = "Удаляет из одной конкретной стажировки")
     @DeleteMapping("/delete")
     public ResponseEntity<?> delete(
-            @Parameter(description = "DTO без связей и списков")
-            @RequestBody
-            LessonInfoDTO lessonId,
+            @Parameter(description = "Парметр запроса id урока")
+            @RequestParam
+            Long id,
             @Parameter(description = "Номер стажировки")
             @PathVariable
             Long internshipId){
         try{
-            lessonService.removeFromInternship(lessonId.getId(), internshipId);
+            lessonService.removeFromInternship(id, internshipId);
             return new ResponseEntity<>(HttpStatus.OK);
         }
         catch (IllegalArgumentException e){
@@ -76,6 +78,16 @@ public class LessonController {
             System.out.println(e.getMessage());
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+    }
+
+    @Operation(summary = "Список заданий",
+            description = "Список заданий этого урока")
+    @GetMapping("/tasklist")
+    public ResponseEntity<List<TaskInfoDTO>> taskList(
+            @Parameter(description = "Парметр запроса id урока")
+            @RequestParam
+            Long id){
+        return new ResponseEntity<>(lessonService.getTasks(id), HttpStatus.FOUND);
     }
 
 }

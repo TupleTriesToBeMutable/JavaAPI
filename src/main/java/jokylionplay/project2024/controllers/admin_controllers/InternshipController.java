@@ -26,9 +26,6 @@ public class InternshipController {
     @Autowired
     private InternshipService internshipService;
 
-    @Autowired
-    private LessonService lessonService;
-
     @Operation(summary = "Создание стажировки",
     description = "Создает стадировки, без связей с уроками, заданиями и пользователями")
     @PostMapping("/create")
@@ -44,11 +41,12 @@ public class InternshipController {
             description = "Удаляет стажировку, если нет никаких связей с ней")
     @DeleteMapping("/delete")
     public ResponseEntity<?> delete(
-            @RequestBody @Parameter(description = "Id стажировки")
-            InternshipInfoDTO internshipInfoDTO){
+            @Parameter(description = "Парметр запроса Id стажировки")
+            @RequestParam
+            Long id){
 
         try {
-            internshipService.delete(internshipInfoDTO.getId());
+            internshipService.delete(id);
             return new ResponseEntity<>(HttpStatus.OK);
         }
         catch (IllegalArgumentException  e){
@@ -61,7 +59,8 @@ public class InternshipController {
             description = "Изменяет только обычный данные, связи те же остаются")
     @PatchMapping("/update")
     public ResponseEntity<?> update(
-            @RequestBody @Parameter(description = "Id стажировки")
+            @Parameter(description = "Id стажировки")
+            @RequestBody
             InternshipInfoDTO internshipInfoDTO){
 
         try {
@@ -83,11 +82,11 @@ public class InternshipController {
 
     @Operation(summary = "Список уроков",
             description = "Список уроков этой стажировки")
-    @GetMapping("/lessonslist")
-    public ResponseEntity<List<LessonTasksDTO>> lessonsList(
-            @Parameter(description = "DTO без связей и списков")
-            @RequestBody
-            InternshipInfoDTO internshipId){
-        return new ResponseEntity<>(internshipService.getAllInInternship(internshipId.getId()), HttpStatus.FOUND);
+    @GetMapping("/lessonlist")
+    public ResponseEntity<List<LessonTasksDTO>> lessonList(
+            @Parameter(description = "Параметр запроса id стажировки")
+            @RequestParam("id")
+            Long id){
+        return new ResponseEntity<>(internshipService.getAllInInternship(id), HttpStatus.FOUND);
     }
 }

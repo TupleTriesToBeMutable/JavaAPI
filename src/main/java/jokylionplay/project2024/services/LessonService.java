@@ -3,9 +3,12 @@ package jokylionplay.project2024.services;
 import jakarta.persistence.EntityManager;
 import jokylionplay.project2024.dto.LessonInfoDTO;
 import jokylionplay.project2024.dto.LessonTasksDTO;
+import jokylionplay.project2024.dto.TaskInfoDTO;
 import jokylionplay.project2024.entities.Internship;
 import jokylionplay.project2024.entities.Lesson;
+import jokylionplay.project2024.entities.Task;
 import jokylionplay.project2024.mappers.LessonMapper;
+import jokylionplay.project2024.mappers.TaskMapper;
 import jokylionplay.project2024.repository.InternshipRepository;
 import jokylionplay.project2024.repository.LessonRepository;
 import lombok.AllArgsConstructor;
@@ -93,6 +96,9 @@ public class LessonService {
 
         internship.get().getLessons().remove(lesson.get());
         internshipRepository.flush();
+    }
 
+    public List<TaskInfoDTO> getTasks(Long lessonId){
+        return TaskMapper.MAPPER.toDTOList(lessonRepository.findAllRelatedTasks(lessonId));
     }
 }

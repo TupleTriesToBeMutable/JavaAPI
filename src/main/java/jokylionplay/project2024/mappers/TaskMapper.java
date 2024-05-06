@@ -9,6 +9,8 @@ import org.mapstruct.factory.Mappers;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 @Scope("session")
 @Mapper
@@ -20,4 +22,6 @@ public interface TaskMapper {
     Task toEntity(TaskInfoDTO s);
 
     void updateEntityInfo(TaskInfoDTO info, @MappingTarget Task relationships);
+
+    List<TaskInfoDTO> toDTOList(List<Task> s);
 }
