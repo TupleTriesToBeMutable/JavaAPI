@@ -29,7 +29,7 @@ public interface InternshipMapper {
     InternshipInfoDTO toInfoDTO(Internship s);
 
     Internship toEntity(InternshipInfoDTO s);
-    
+
     void updateEntityInfo(InternshipInfoDTO info, @MappingTarget Internship relationships);
 
     List<InternshipInfoDTO> toInfoDTOList(List<Internship> s);

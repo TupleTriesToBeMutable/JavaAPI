@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name = "Public Регистрация новых пользователей",
      description = "Регистрация доступная всем")
 @RestController
-@RequestMapping("/registration")
+@RequestMapping("/guest")
 @AllArgsConstructor
 public class RegistrationController {
     @Autowired
@@ -25,7 +25,7 @@ public class RegistrationController {
 
     @Operation(summary = "Регистрация на сайте",
             description = "Создает нового пользователя, без записи на стажировку")
-    @PostMapping
+    @PostMapping("/registration")
     public ResponseEntity<?> userRegistration(
             @Parameter(description = "DTO объект пользователя")
             @RequestBody UserInfoDTO dto){

@@ -43,4 +43,9 @@ public class UserInternshipController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+
+    @GetMapping("/getall")
+    public ResponseEntity<?> getAll(){
+        return new ResponseEntity<>(internshipService.getAll(), HttpStatus.OK);
+    }
 }
