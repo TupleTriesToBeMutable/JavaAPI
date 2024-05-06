@@ -82,7 +82,7 @@ public class LessonController {
 
     @Operation(summary = "Список заданий",
             description = "Список заданий этого урока")
-    @GetMapping("/tasklist")
+    @GetMapping("/tasks")
     public ResponseEntity<List<TaskInfoDTO>> taskList(
             @Parameter(description = "Парметр запроса id урока")
             @RequestParam

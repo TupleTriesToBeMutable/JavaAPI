@@ -82,7 +82,7 @@ public class InternshipController {
 
     @Operation(summary = "Список уроков",
             description = "Список уроков этой стажировки")
-    @GetMapping("/lessonlist")
+    @GetMapping("/lessons")
     public ResponseEntity<List<LessonTasksDTO>> lessonList(
             @Parameter(description = "Параметр запроса id стажировки")
             @RequestParam("id")

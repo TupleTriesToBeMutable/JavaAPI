@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Tag(name = "Admin Задания", description = "Управление заданиями")
 @RestController
-@RequestMapping("/admin/{adminId}")
+@RequestMapping("/admin/{adminId}/internships/{internshipId}/lessons/{lessonId}/tasks")
 @AllArgsConstructor
 public class TaskController {
     private TaskService taskService;
@@ -22,7 +22,8 @@ public class TaskController {
     @PostMapping("/create")
     public ResponseEntity<TaskInfoDTO> create(
             @Parameter(description = "DTO объект")
-            @RequestBody TaskInfoDTO dto){
+            @RequestBody
+            TaskInfoDTO dto){
         TaskInfoDTO saved = taskService.create(dto);
         return new ResponseEntity<>(saved, HttpStatus.CREATED);
     }
@@ -31,10 +32,11 @@ public class TaskController {
             description = "Удаление, если не связан ни с чем")
     @DeleteMapping("/delete")
     public ResponseEntity<?> delete(
-            @Parameter(description = "Id задания")
-            @RequestBody TaskInfoDTO dto){
+            @Parameter(description = "Параметр запроса id задания")
+            @RequestParam
+            Long id){
         try {
-            taskService.delete(dto.getId());
+            taskService.delete(id);
             return new ResponseEntity<>(HttpStatus.OK);
         }
         catch (IllegalArgumentException e){
@@ -48,7 +50,8 @@ public class TaskController {
     @PatchMapping ("/update")
     public ResponseEntity<?> update(
             @Parameter(description = "DTO для обновления")
-            @RequestBody TaskInfoDTO dto){
+            @RequestBody
+            TaskInfoDTO dto){
         try {
             taskService.update(dto);
             return new ResponseEntity<>(HttpStatus.OK);
