@@ -17,7 +17,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "Task")
+@Table(name = "tasks")
 public class Task {
 
     @Schema(description = "ID задания")
