@@ -51,14 +51,4 @@ public class UserService {
         else
             return InternshipMapper.MAPPER.toInternshipLessonsDTOList(userRepository.findInternshipsRelatedWithUser(userId));
     }
-
-
-    public List<UserProgressDTO> getReportByInternshipIdAndUserId(Long internshipId, Long userId) throws IllegalArgumentException{
-        if (!internshipRepository.existsById(internshipId))
-            throw new IllegalArgumentException("Reporting : Intenship dosn`t exist");
-        if(!userRepository.existsById(userId))
-            throw new IllegalArgumentException("Reporting : User dosn`t exist");
-        List<Object[]> result = userRepository.getReportByInternshipIdAndUserId(internshipId, userId);
-        return UserProgressMapper.MAPPER.toDTOFromListObject(result);
-    }
 }

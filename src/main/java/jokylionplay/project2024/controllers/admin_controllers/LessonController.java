@@ -9,6 +9,7 @@ import jokylionplay.project2024.dto.LessonTasksDTO;
 import jokylionplay.project2024.dto.TaskInfoDTO;
 import jokylionplay.project2024.services.LessonService;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +21,7 @@ import java.util.List;
 @AllArgsConstructor
 public class LessonController {
 
+    @Autowired
     private LessonService lessonService;
 
     @Operation(summary = "Создание урока",

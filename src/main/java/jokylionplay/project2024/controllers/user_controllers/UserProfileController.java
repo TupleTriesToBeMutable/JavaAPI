@@ -4,6 +4,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jokylionplay.project2024.dto.UserInfoDTO;
+import jokylionplay.project2024.services.ProgressReportService;
 import jokylionplay.project2024.services.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,9 @@ import org.springframework.web.bind.annotation.*;
 public class UserProfileController {
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private ProgressReportService progressReportService;
 
     @Operation(summary = "Просмотр профиля",
             description = "Информация о пользователе")
@@ -82,7 +86,7 @@ public class UserProfileController {
             Long userId){
         try{
             return new ResponseEntity<>(
-                    userService.getReportByInternshipIdAndUserId(internshipId, userId),
+                    progressReportService.getReportByInternshipIdAndUserId(internshipId, userId),
                     HttpStatus.FOUND);
         }
         catch (IllegalArgumentException e){
