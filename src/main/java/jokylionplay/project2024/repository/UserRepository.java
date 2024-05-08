@@ -18,4 +18,24 @@ public interface UserRepository extends JpaRepository<User, Long> {
             "where internships_users.user_id = :userId",
             nativeQuery = true)
     List<Internship> findInternshipsRelatedWithUser(Long userId);
+
+    @Modifying
+    @Query(value = "select \n" +
+            "tasks.name,\n" +
+            "tasks.description,\n" +
+            "user_progress.status,\n" +
+            "user_progress.comment\n" +
+            "from user_progress\n" +
+            "join(select lessons_tasks.task_id\n" +
+            "\t\tfrom lessons_tasks\n" +
+            "\t\tjoin (select internships_lessons.lesson_id \n" +
+            "\t\t\t\tfrom internships_lessons\n" +
+            "\t\t\t\twhere internships_lessons.internship_id = :internshipId ) as need_lesson\n" +
+            "\t\ton lessons_tasks.lesson_id = need_lesson.lesson_id) as need_task\n" +
+            "on user_progress.task_id = need_task.task_id\n" +
+            "join tasks\n" +
+            "on user_progress.task_id = tasks.id\n" +
+            "where user_progress.user_id = :userId ;",
+            nativeQuery = true)
+    List<Object[]> getReportByInternshipIdAndUserId(Long internshipId, Long userId);
 }

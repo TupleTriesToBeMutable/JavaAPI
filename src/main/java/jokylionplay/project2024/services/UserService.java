@@ -2,9 +2,12 @@ package jokylionplay.project2024.services;
 
 import jokylionplay.project2024.dto.InternshipLessonsDTO;
 import jokylionplay.project2024.dto.UserInfoDTO;
+import jokylionplay.project2024.dto.UserProgressDTO;
 import jokylionplay.project2024.entities.User;
+import jokylionplay.project2024.entities.UserProgress;
 import jokylionplay.project2024.mappers.InternshipMapper;
 import jokylionplay.project2024.mappers.UserMapper;
+import jokylionplay.project2024.mappers.UserProgressMapper;
 import jokylionplay.project2024.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,5 +47,11 @@ public class UserService {
             throw new IllegalArgumentException("GettingInfo : User doesn`t exist");
         else
             return InternshipMapper.MAPPER.toInternshipLessonsDTOList(userRepository.findInternshipsRelatedWithUser(userId));
+    }
+
+
+    public List<UserProgressDTO> getReportByInternshipIdAndUserId(Long internshipId, Long userId){
+        List<Object[]> result = userRepository.getReportByInternshipIdAndUserId(internshipId, userId);
+        return UserProgressMapper.MAPPER.toDTOFromListObject(result);
     }
 }

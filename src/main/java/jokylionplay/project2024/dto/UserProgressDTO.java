@@ -9,11 +9,9 @@ import lombok.Data;
 @AllArgsConstructor
 public class UserProgressDTO {
 
-    private Long id;
+    private String name;
 
-    private User user;
-
-    private Task task;
+    private String description;
 
     private boolean status;
 

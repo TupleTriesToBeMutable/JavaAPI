@@ -69,4 +69,25 @@ public class UserProfileController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+
+    @Operation(summary = "Успеваемость",
+            description = "Просмотр успеваемости по определенной стажировке")
+    @GetMapping("/report")
+    public ResponseEntity<?> usersGrade(
+            @Parameter(description = "Параметр запроса id стажировки")
+            @RequestParam("id")
+            Long internshipId,
+            @Parameter(description = "Переменная пути id пользователя")
+            @PathVariable
+            Long userId){
+        try{
+            return new ResponseEntity<>(
+                    userService.getReportByInternshipIdAndUserId(internshipId, userId),
+                    HttpStatus.FOUND);
+        }
+        catch (IllegalArgumentException e){
+            System.out.println(e.getMessage());
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
 }
