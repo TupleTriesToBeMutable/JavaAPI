@@ -1,5 +1,6 @@
 package jokylionplay.project2024.services;
 
+import jokylionplay.project2024.dto.AllUsersProgress;
 import jokylionplay.project2024.dto.UserProgressDTO;
 import jokylionplay.project2024.mappers.UserProgressMapper;
 import jokylionplay.project2024.repository.InternshipRepository;
@@ -29,7 +30,14 @@ public class ProgressReportService {
         if(!userRepository.existsById(userId))
             throw new IllegalArgumentException("Reporting : User dosn`t exist");
         List<Object[]> result = userRepository.getReportByInternshipIdAndUserId(internshipId, userId);
-        return UserProgressMapper.MAPPER.toDTOFromListObject(result);
+        return UserProgressMapper.MAPPER.toUserProgressDTOFromListObject(result);
+    }
+
+    public List<AllUsersProgress> getReportByInternshipId(Long internshipId){
+        if (!internshipRepository.existsById(internshipId))
+            throw new IllegalArgumentException("Reporting : Intenship dosn`t exist");
+        List<Object[]> result = internshipRepository.getReportForAllUsersByInternshipId(internshipId);
+        return UserProgressMapper.MAPPER.toAllUsersProgressFromListObject(result);
     }
 
 }
