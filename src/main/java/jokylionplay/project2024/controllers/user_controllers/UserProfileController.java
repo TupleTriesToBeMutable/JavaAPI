@@ -43,10 +43,7 @@ public class UserProfileController {
     public ResponseEntity<?> updateProfile(
             @Parameter(description = "DTO в котором обновленные данные пользователя")
             @RequestBody
-            UserInfoDTO dto,
-            @Parameter(description = "Параметр запроса id пользователя")
-            @PathVariable
-            Long userId){
+            UserInfoDTO dto){
         try{
             userService.update(dto);
             return new ResponseEntity<>(HttpStatus.OK);
@@ -59,14 +56,13 @@ public class UserProfileController {
 
     @Operation(summary = "Просмотр стажировок",
             description = "Стажировки на которые записан пользователь")
-    @GetMapping("/my-internships")
+    @GetMapping("/my-internships-tasks")
     public ResponseEntity<?> listOfInternships(
             @Parameter(description = "Параметр запроса id пользователя")
             @PathVariable
             Long userId){
         try{
-            userService.findInternshipsRelatedWithUser(userId);
-            return new ResponseEntity<>(HttpStatus.FOUND);
+            return new ResponseEntity<>(userService.findInternshipsRelatedWithUser(userId), HttpStatus.FOUND);
         }
         catch (IllegalArgumentException e){
             System.out.println(e.getMessage());

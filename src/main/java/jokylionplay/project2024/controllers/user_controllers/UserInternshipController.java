@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @Tag(name = "User Стажировки",
         description = "Просмотр стажировок и регистрация")
 @RestController
-@RequestMapping("/user/{usedId}/internships")
+@RequestMapping("/user/{usedId}")
 @AllArgsConstructor
 public class UserInternshipController {
     @Autowired
@@ -44,7 +44,7 @@ public class UserInternshipController {
         }
     }
 
-    @GetMapping("/getall")
+    @GetMapping("/internships")
     public ResponseEntity<?> getAll(){
         return new ResponseEntity<>(internshipService.getAll(), HttpStatus.OK);
     }
