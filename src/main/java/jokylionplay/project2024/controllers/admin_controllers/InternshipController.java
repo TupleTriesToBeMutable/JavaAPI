@@ -56,7 +56,7 @@ public class InternshipController {
             description = "Изменяет только обычный данные, связи те же остаются")
     @PatchMapping("/update")
     public ResponseEntity<?> update(
-            @Parameter(description = "Id стажировки")
+            @Parameter(description = "DTO стажировки с новыми данными")
             @RequestBody
             InternshipInfoDTO internshipInfoDTO){
 
@@ -70,8 +70,8 @@ public class InternshipController {
         }
     }
 
-    @Operation(summary = "Изменение данных стажировки",
-            description = "Изменяет только обычный данные, связи те же остаются")
+    @Operation(summary = "Список курсов",
+            description = "Получение списка курсов")
     @GetMapping("/getall")
     public ResponseEntity<?> getAll(){
         return new ResponseEntity<>(internshipService.getAll(), HttpStatus.OK);

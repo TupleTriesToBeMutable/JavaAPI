@@ -11,11 +11,17 @@ import java.util.List;
 
 public interface UserRepository extends JpaRepository<User, Long> {
     @Modifying
-    @Query(value = "select * " +
-            "from internships " +
-            "join internships_users " +
-            "on internships.id = internships_users.internship_id " +
-            "where internships_users.user_id = :userId",
+    @Query(value = "select\n" +
+            "internships.id ,\n" +
+            "internships.name ,\n" +
+            "internships.start_date ,\n" +
+            "internships.end_date ,\n" +
+            "internships.registration_end,\n" +
+            "internships.status\n" +
+            "from internships \n" +
+            "join internships_users \n" +
+            "on internships.id = internships_users.internship_id \n" +
+            "where internships_users.user_id = :userId ;",
             nativeQuery = true)
     List<Internship> findInternshipsRelatedWithUser(Long userId);
 

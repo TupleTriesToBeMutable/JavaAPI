@@ -26,7 +26,7 @@ public class ProgressReportController {
             description = "Успеваемость всех студентов на определнной стажировке")
     @GetMapping("/report")
     public ResponseEntity<?> create(
-            @Parameter(description = "DTO объект")
+            @Parameter(description = "Переменная пути id стажировки")
             @PathVariable("internshipId")
             Long internshipId){
         try {

@@ -31,7 +31,7 @@ public class LessonController {
             @Parameter(description = "DTO только с информацией")
             @RequestBody
             LessonInfoDTO lessonInfoDTO,
-            @Parameter(description = "Номер стажировки")
+            @Parameter(description = "Переменная пути id стажировки")
             @PathVariable
             Long internshipId){
 
@@ -52,7 +52,7 @@ public class LessonController {
             @Parameter(description = "Парметр запроса id урока")
             @RequestParam("id")
             Long lessonId,
-            @Parameter(description = "Номер стажировки")
+            @Parameter(description = "Переменная пути id стажировки")
             @PathVariable
             Long internshipId){
         try{
@@ -69,7 +69,7 @@ public class LessonController {
             description = "Обновление имени, самого задания")
     @PatchMapping("/update")
     public ResponseEntity<?> update(
-            @Parameter(description = "DTO без связей и списков, проверяет на существование")
+            @Parameter(description = "DTO без связей")
             @RequestBody
             LessonInfoDTO dto){
         try{

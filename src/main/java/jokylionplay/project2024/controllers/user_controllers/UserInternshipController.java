@@ -44,6 +44,8 @@ public class UserInternshipController {
         }
     }
 
+    @Operation(summary = "Просмотр всех стажировок",
+            description = "Просмотр списка и информации о всех стажировках")
     @GetMapping("/internships")
     public ResponseEntity<?> getAll(){
         return new ResponseEntity<>(internshipService.getAll(), HttpStatus.OK);

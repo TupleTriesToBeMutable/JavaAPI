@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Tag(name = "Admin Проверка заданий", description = "Решено или не решено, оставление комментария")
 @RestController
-@RequestMapping("/admin/{adminId}/user/{userId}")
+@RequestMapping("/admin/{adminId}/user/{userId}/updated-tasks")
 @AllArgsConstructor
 public class CheckingTasksController {
 

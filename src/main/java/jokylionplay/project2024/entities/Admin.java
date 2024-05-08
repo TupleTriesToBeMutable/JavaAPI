@@ -7,7 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Schema(description = "Администарторы")
+@Schema(description = "Администраторы")
 @Getter
 @Setter
 @AllArgsConstructor
