@@ -17,6 +17,8 @@ public class UserInfoDTO {
 
     private String username;
 
+    private String password;
+
     private String telegramId;
 
     private String info;

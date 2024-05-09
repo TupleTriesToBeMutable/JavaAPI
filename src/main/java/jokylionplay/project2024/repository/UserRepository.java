@@ -44,4 +44,11 @@ public interface UserRepository extends JpaRepository<User, Long> {
             "where user_progress.user_id = :userId ;",
             nativeQuery = true)
     List<Object[]> getReportByInternshipIdAndUserId(Long internshipId, Long userId);
+
+    User findByUsername(String username);
+
+
+    @Query(value = "select * from users;",
+            nativeQuery = true)
+    List<User> getAll();
 }
