@@ -8,6 +8,7 @@ import jokylionplay.project2024.repository.InternshipRepository;
 import jokylionplay.project2024.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -19,20 +20,17 @@ public class RegistrationService {
     private UserRepository userRepository;
     @Autowired
     private InternshipRepository internshipRepository;
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     public UserInfoDTO registration(UserInfoDTO dto){
+        String passwordCoded = bCryptPasswordEncoder.encode(dto.getPassword());
+        dto.setPassword(passwordCoded);
         User user = UserMapper.MAPPER.toEntity(dto);
         user = userRepository.save(user);
         return UserMapper.MAPPER.toInfoDTO(user);
     }
 
-    /**
-     *
-     * @param internshipId
-     * @param userId
-     * @return
-     *
-     */
     public void internshipRegistration(Long internshipId, Long userId) throws IllegalArgumentException{
         Optional<User> user = userRepository.findById(userId);
         Optional<Internship> internship = internshipRepository.findById(internshipId);
