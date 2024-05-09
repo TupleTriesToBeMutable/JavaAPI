@@ -31,8 +31,6 @@ public class RegistrationController {
     @Autowired
     private RegistrationService registrationService;
 
-    private UserService userService;
-
     @Operation(summary = "Регистрация на сайте",
             description = "Создает нового пользователя, без записи на стажировку")
     @PostMapping("/registration")
@@ -40,23 +38,6 @@ public class RegistrationController {
             @Parameter(description = "DTO объект пользователя")
             @RequestBody UserInfoDTO dto){
         registrationService.registration(dto);
-        return new ResponseEntity<>(HttpStatus.ACCEPTED);
-    }
-
-    @Autowired
-    UserRepository userRepository;
-
-    @Autowired
-    AdminRepository adminRepository;
-    @PostMapping("/re")
-    public ResponseEntity<?> remake(){
-
-        List<Admin> admins = adminRepository.getAll();
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        for(Admin u : admins){
-            u.setPassword(encoder.encode(u.getPassword()));
-        }
-        adminRepository.flush();
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
 }
