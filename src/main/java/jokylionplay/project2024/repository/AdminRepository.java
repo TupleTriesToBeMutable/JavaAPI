@@ -8,8 +8,18 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface AdminRepository extends JpaRepository<Admin, Long> {
+
+    /**
+     * Поиск пользователей по username
+     * @param username
+     * @return
+     */
     Admin findByLogin(String username);
 
+    /**
+     * Получение списка админов
+     * @return список админов
+     */
     @Query(value = "select * from admins;",
             nativeQuery = true)
     List<Admin> getAll();

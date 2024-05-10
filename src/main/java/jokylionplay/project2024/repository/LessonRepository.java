@@ -10,6 +10,11 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 public interface  LessonRepository extends JpaRepository<Lesson, Long> {
+    /**
+     * Получение задач которые входят в урок
+     * @param lessonId id урока
+     * @return список задач
+     */
     @Modifying
     @Query(value = "select * " +
             "from lessons_tasks " +

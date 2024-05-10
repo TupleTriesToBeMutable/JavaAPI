@@ -8,6 +8,12 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface InternshipRepository extends JpaRepository<Internship, Long> {
+
+    /**
+     * Нахождение всех уроков которые входят в конкретную стажировку
+     * @param internshipId id стажировки
+     * @return
+     */
     @Modifying
     @Query(value = "select lessons.id, lessons.name, lessons.visibility " +
             "from internships_lessons " +
@@ -17,6 +23,12 @@ public interface InternshipRepository extends JpaRepository<Internship, Long> {
             nativeQuery = true)
     List<Lesson> findLessonsRelatedWithInternship(Long internshipId);
 
+
+    /**
+     * Для получение статиски выполнения конкретной стажировки
+     * @param internshipId id стажировки
+     * @return список массивов Object, необходимо преобразовать в AllUsersProgress DTO
+     */
     @Modifying
     @Query(value = "select \n" +
             "users.username,\n" +

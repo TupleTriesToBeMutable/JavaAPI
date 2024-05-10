@@ -10,6 +10,11 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface UserRepository extends JpaRepository<User, Long> {
+    /**
+     * Получение списка курсов на которые записан пользователь
+     * @param userId id пользоватея
+     * @return cписок курсов
+     */
     @Modifying
     @Query(value = "select\n" +
             "internships.id ,\n" +
@@ -25,6 +30,12 @@ public interface UserRepository extends JpaRepository<User, Long> {
             nativeQuery = true)
     List<Internship> findInternshipsRelatedWithUser(Long userId);
 
+    /**
+     * Получение статиски выполнения курса для одного пользователя
+     * @param internshipId
+     * @param userId
+     * @return
+     */
     @Modifying
     @Query(value = "select \n" +
             "tasks.name,\n" +
@@ -45,9 +56,17 @@ public interface UserRepository extends JpaRepository<User, Long> {
             nativeQuery = true)
     List<Object[]> getReportByInternshipIdAndUserId(Long internshipId, Long userId);
 
+    /**
+     * Поиск по имени
+     * @param username
+     * @return пользовать
+     */
     User findByUsername(String username);
 
-
+    /**
+     * Получение всх пользователей
+     * @return список пользователей
+     */
     @Query(value = "select * from users;",
             nativeQuery = true)
     List<User> getAll();
