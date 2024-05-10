@@ -4,16 +4,55 @@ services:
   postgres:
     container_name: postgresdb
     image: postgres:15
-    restart: unless-stopped
+    restart: 'no'
     ports:
       - "5431:5432"
     volumes:
-      - '$DB_HOME/postgresql:/var/lib/postgresql/data'
+      - '$DATA_HOME/postgresql:/var/lib/postgresql/data'
     shm_size: 128mb
     environment:
       POSTGRES_DB: $DB_NAME
       POSTGRES_USER: $POSTGRES_USER
       POSTGRES_PASSWORD: $POSTGRES_PASSWORD
+
+  gitlab:
+    image: gitlab/gitlab-ce:nightly
+    container_name: gitlab
+#    depends_on:
+#      - backend
+    restart: 'no'
+    hostname: 'gitlab.example.com'
+    environment:
+      GITLAB_OMNIBUS_CONFIG: |
+        external_url 'http://localhost:8929'
+        gitlab_rails['gitlab_shell_ssh_port'] = 2424
+    ports:
+      - '8929:8929'
+      - '443:443'
+      - '2424:2424'
+    volumes:
+      - '$DATA_HOME/gitlab/config:/etc/gitlab'
+      - '$DATA_HOME/gitlab/logs:/var/log/gitlab'
+      - '$DATA_HOME/gitlab/data:/var/opt/gitlab'
+    shm_size: '256m'
+
+#  backend:
+#    container_name: backend
+#    restart: unless-stopped
+#    depends_on:
+#      - postgres
+#    links:
+#      - postgres
+#    environment:
+#        DATABASE_HOST: postgres
+#    build:
+#      context: /
+#      dockerfile: .dockerfile
+#    ports:
+#      - "8080:8080"
+
+
+
 
 
 
