@@ -1,17 +1,19 @@
 package jokylionplay.project2024.dto;
 
-import jokylionplay.project2024.entities.Lesson;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+
 import java.sql.Date;
 import java.util.Collection;
-
+@Schema(description = "Данные стажировки вместе с уроками")
 @Data
 @AllArgsConstructor
 public class InternshipLessonsDTO {
 
     private Long id;
 
+    @Schema(description = "Список уроков")
     private Collection<LessonTasksDTO> lessons;
 
     private String name;

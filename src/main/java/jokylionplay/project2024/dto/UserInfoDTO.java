@@ -1,10 +1,12 @@
 package jokylionplay.project2024.dto;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.sql.Date;
 
+@Schema(description = "Информация о пользователе")
 @Data
 @AllArgsConstructor
 public class UserInfoDTO {

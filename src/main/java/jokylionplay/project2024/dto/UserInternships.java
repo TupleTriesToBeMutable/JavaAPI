@@ -1,5 +1,6 @@
 package jokylionplay.project2024.dto;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jokylionplay.project2024.entities.Internship;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,6 +8,7 @@ import lombok.Data;
 import java.sql.Date;
 import java.util.Collection;
 
+@Schema(description = "Информации о пользователе со списком проходимых стажировок")
 @Data
 @AllArgsConstructor
 public class UserInternships {
