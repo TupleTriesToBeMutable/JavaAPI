@@ -9,6 +9,10 @@ import org.springframework.stereotype.Component;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+/**
+ * AuthenticationEntryPoint
+ * Возвращение http ответ при неудачной авторизации
+ */
 @Component
 public class MyBasicAuthenticationEntryPoint extends BasicAuthenticationEntryPoint {
     @Override

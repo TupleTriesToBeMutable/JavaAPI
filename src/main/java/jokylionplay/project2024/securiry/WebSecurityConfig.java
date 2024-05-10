@@ -24,11 +24,20 @@ public class WebSecurityConfig {
     @Autowired
     MyBasicAuthenticationEntryPoint authenticationEntryPoint;
 
+    /**
+     * Тип шифрования
+     * @return шифровщик
+     */
     @Bean
     public static BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
+    /**
+     * Аутификация из памяти
+     * @param auth
+     * @throws Exception
+     */
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth)
             throws Exception {
@@ -36,13 +45,19 @@ public class WebSecurityConfig {
                 .password(bCryptPasswordEncoder().encode("pass")).roles("USER");
     }
 
+    /**
+     * Конфигуряция фильтра
+     * @param http
+     * @return
+     * @throws Exception
+     */
     @Bean
     public SecurityFilterChain config(HttpSecurity http) throws Exception {
 
         return http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        //.requestMatchers("/guest/registration").permitAll()
+                        //Разграничение на админскую, пользовательскую и публичную части
                         .requestMatchers("/admin/**").hasAuthority("ADMIN")
                         .requestMatchers("/user/**").hasAuthority("USER")
                         .anyRequest().anonymous()
@@ -53,6 +68,10 @@ public class WebSecurityConfig {
                 .build();
     }
 
+    /**
+     * Конфигурация доступа к пароля и шифровки
+     * @return
+     */
     @Bean
     public AuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();

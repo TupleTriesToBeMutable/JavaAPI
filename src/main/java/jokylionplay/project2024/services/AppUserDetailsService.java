@@ -14,6 +14,9 @@ import org.springframework.stereotype.Component;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Сервис для работы с Spring Security
+ */
 @Component
 public class AppUserDetailsService implements UserDetailsService {
 
@@ -23,6 +26,12 @@ public class AppUserDetailsService implements UserDetailsService {
     @Autowired
     private AdminRepository adminRepository;
 
+    /**
+     * Создание UserDetails по username
+     * @param username the username identifying the user whose data is required
+     * @return
+     * @throws UsernameNotFoundException
+     */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUsername(username);
