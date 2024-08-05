@@ -2,11 +2,9 @@ package jokylionplay.project2024.services;
 
 import jokylionplay.project2024.dto.InternshipLessonsDTO;
 import jokylionplay.project2024.dto.UserInfoDTO;
-import jokylionplay.project2024.dto.UserProgressDTO;
 import jokylionplay.project2024.entities.User;
 import jokylionplay.project2024.mappers.InternshipMapper;
 import jokylionplay.project2024.mappers.UserMapper;
-import jokylionplay.project2024.mappers.UserProgressMapper;
 import jokylionplay.project2024.repository.InternshipRepository;
 import jokylionplay.project2024.repository.UserRepository;
 import lombok.AllArgsConstructor;
